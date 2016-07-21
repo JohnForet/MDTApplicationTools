@@ -34,14 +34,14 @@ Here's an example of what it should look like:
 ![Module Installation Directory](Media/ModuleInstallation.png)
 
 
-## Authors
+### Authors
 
 * **John Foret** - *Initial work* - [JohnForet](https://github.com/JohnForet)
 
-## License
+### License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Acknowledgments
+### Acknowledgments
 
 Hat's off to Don Jones and Jeffrey Hicks *Learn Powershell Toolmaking in a Month of Lunches*, which helped me write this module. Also, kudos to Johan Arwidmark and Mikael Nystrom, both for the book *Deployment Fundamentals Vol 4: Deploying Windows 8 and Office 2013 Using MDT 2012 Update 1*, and for the support they provide to the windows deployment community.
