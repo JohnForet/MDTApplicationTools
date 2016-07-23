@@ -33,6 +33,10 @@ Here's an example of what it should look like:
 
 ![Module Installation Directory](Media/ModuleInstallation.png)
 
+If you have PowerShell 5, you can also install it directly from the PowerShell Gallery.
+
+![PowerShell Gallery Installation](Media/PSGalleryInstallation.png)
+
 
 ### Authors
 
