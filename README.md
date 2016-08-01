@@ -33,6 +33,8 @@ Here's an example of what it should look like:
 
 ![Module Installation Directory](Media/ModuleInstallation.png)
 
+### Help
+The help in this module is maintained with [platyPS](https://github.com/PowerShell/platyPS), which is a powershell module that lets you generate external powershell help files from easily maintained markdown file(s). In order to update the help in this module, simply edit the markdown file for the function in `.\docs` in the module's root directory, afterwards running `New-ExternalHelp .\docs -OutputPath en-US\ -Force`. This command will update the external help file for the module, `.\en-US\MDTApplicationTools-help.xml`.
 
 ### Authors
 
