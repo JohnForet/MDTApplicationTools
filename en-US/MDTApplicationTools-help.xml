@@ -1,0 +1,1169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<helpItems schema="maml">
+
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>Find-MDTApplicationContent</command:name>
+<command:verb>Find</command:verb>
+<command:noun>MDTApplicationContent</command:noun>
+<maml:description><maml:para>Searches MDT shares for applications whose content contain specified text.
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>The Find-MDTApplicationContent function retrieves MDT applications from the specified MDT share that contain the string specified. It can query either just the CommandLine attribute of the application, or it can also query the install scripts themselves if the ParseScript switch is specified.
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>Find-MDTApplicationContent</maml:name>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none"><maml:name>ShareName</maml:name>
+<maml:Description><maml:para>Specifies the name of the MDT share to query. In order to query by name, the MDT share must be mounted using either New-PSDrive or Set-MDTDrive. Here are some examples that should get you up and running:
+</maml:para>
+<maml:para>`PS C:&gt;New-PSDrive -Name MDTProduction -PSProvider MDTProvider -Root "\FILESERVER\MDTProduction$" -NetworkPath "\FILESERVER\MDTProduction$" -Scope Global`
+</maml:para>
+<maml:para>or
+</maml:para>
+<maml:para>`PS C:&gt;Set-MDTDrive -Name MDTProduction -Path "\FILESERVER\MDTProduction$"`
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="true" pipelineInput="False" position="1" aliases="none"><maml:name>String</maml:name>
+<maml:Description><maml:para>Specifies the string to search for in MDT applications. If typed explicitly (i.e. "setup.exe /s"), it will only return applications that have that exact name. The parameter also supports wildcards though, so typing something like \ powershell.exe\ would return all the applications that have powershell.exe in their commandline or install script(depending on whether the ParseScript parameter was used).
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ParseScript</maml:name>
+<maml:Description><maml:para>IF NOT specified, the only part of the apps that are searched are the "CommandLine" attribute, which is the initial command that gets launched at install time to install the app(it can reference either an executable or an install script path). IF specified, the script will actually go through the applications working directory, and parse through any install scripts to see if they contain the specified string. It searches the following files:
+</maml:para>
+<maml:para>".bat",".cmd",".vbs",".wsf",".ps1",".psm1",".psd1"
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ParseScript</maml:name>
+<maml:Description><maml:para>IF NOT specified, the only part of the apps that are searched are the "CommandLine" attribute, which is the initial command that gets launched at install time to install the app(it can reference either an executable or an install script path). IF specified, the script will actually go through the applications working directory, and parse through any install scripts to see if they contain the specified string. It searches the following files:
+</maml:para>
+<maml:para>".bat",".cmd",".vbs",".wsf",".ps1",".psm1",".psd1"
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none"><maml:name>ShareName</maml:name>
+<maml:Description><maml:para>Specifies the name of the MDT share to query. In order to query by name, the MDT share must be mounted using either New-PSDrive or Set-MDTDrive. Here are some examples that should get you up and running:
+</maml:para>
+<maml:para>`PS C:&gt;New-PSDrive -Name MDTProduction -PSProvider MDTProvider -Root "\FILESERVER\MDTProduction$" -NetworkPath "\FILESERVER\MDTProduction$" -Scope Global`
+</maml:para>
+<maml:para>or
+</maml:para>
+<maml:para>`PS C:&gt;Set-MDTDrive -Name MDTProduction -Path "\FILESERVER\MDTProduction$"`
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="true" pipelineInput="False" position="1" aliases="none"><maml:name>String</maml:name>
+<maml:Description><maml:para>Specifies the string to search for in MDT applications. If typed explicitly (i.e. "setup.exe /s"), it will only return applications that have that exact name. The parameter also supports wildcards though, so typing something like \ powershell.exe\ would return all the applications that have powershell.exe in their commandline or install script(depending on whether the ParseScript parameter was used).
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes><command:inputType><dev:type><maml:name>None</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:inputType>
+</command:inputTypes>
+<command:returnValues><command:returnValue><dev:type><maml:name>System.Object</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:returnValue>
+</command:returnValues>
+<maml:alertSet><maml:alert><maml:para>
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>Example 1</maml:title>
+<dev:code>PS C:\&gt; Find-MDTApplicationContent -ShareName MDTProduction -string "setup.exe /s"</dev:code>
+<dev:remarks><maml:para>This command searches the MDT share MDTProduction, and returns any applications where the "CommandLine" attribute matches "setup.exe /s" exactly.
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 2</maml:title>
+<dev:code>PS C:\&gt; Find-MDTApplicationContent -ShareName MDTProduction -string *.bat*</dev:code>
+<dev:remarks><maml:para>This command searches the MDT share MDTProduction, and returns any applications that call a .bat file in their "CommandLine" attribute
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 3</maml:title>
+<dev:code>PS C:\&gt; Find-MDTApplicationContent -ShareName MDTProduction -string "C:\Program Files\*" -ParseScript</dev:code>
+<dev:remarks><maml:para>This command searches the MDT share MDTProduction, and returns any applications that call a .bat file in their "CommandLine" attribute
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks><maml:navigationLink><maml:linkText>Online Version:</maml:linkText>
+<maml:uri>https://github.com/JohnForet/MDTApplicationTools/blob/master/docs/Find-MDTApplicationContent.md</maml:uri>
+</maml:navigationLink>
+</command:relatedLinks>
+</command:command>
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>Get-MDTApplication</command:name>
+<command:verb>Get</command:verb>
+<command:noun>MDTApplication</command:noun>
+<maml:description><maml:para>Gets one or more MDT applications
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>The Get-MDTApplication function retrieves MDT applications from the specified MDT share. It can be used to either retrieve all the applications at once, or just by the applications Name or GUID of the wanted application.
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>Get-MDTApplication</maml:name>
+<command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>GUID</maml:name>
+<maml:Description><maml:para>Specifies the GUID of an application to query the MDT share for. Alternate to Name Parameter.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Location</maml:name>
+<maml:Description><maml:para>Specifies that the query be restricted to a folder located within the Applications folder. Specifying "Install\Broken" for example would restrict the search to the folder "Applications\Install\Broken" in the MDT share.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ShareName</maml:name>
+<maml:Description><maml:para>Specifies the name of the MDT share to query. In order to query by name, the MDT share must be mounted using either New-PSDrive or Set-MDTDrive. Here are some examples that should get you up and running:
+</maml:para>
+<maml:para>`PS C:&gt;New-PSDrive -Name MDTProduction -PSProvider MDTProvider -Root "\FILESERVER\MDTProduction$" -NetworkPath "\FILESERVER\MDTProduction$" -Scope Global`
+</maml:para>
+<maml:para>or
+</maml:para>
+<maml:para>`PS C:&gt;Set-MDTDrive -Name MDTProduction -Path "\FILESERVER\MDTProduction$"`
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+<command:syntaxItem><maml:name>Get-MDTApplication</maml:name>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Location</maml:name>
+<maml:Description><maml:para>Specifies that the query be restricted to a folder located within the Applications folder. Specifying "Install\Broken" for example would restrict the search to the folder "Applications\Install\Broken" in the MDT share.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>Name</maml:name>
+<maml:Description><maml:para>Specifies the name of an application to search the MDT share for. If typed explicitly (i.e. "Install - Adobe Flash Player - x64"), will only return applications that have that exact name. The parameter also supports wildcards though, so typing something like "\ adobe\ " would return all the applications that have adobe in their name.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ShareName</maml:name>
+<maml:Description><maml:para>Specifies the name of the MDT share to query. In order to query by name, the MDT share must be mounted using either New-PSDrive or Set-MDTDrive. Here are some examples that should get you up and running:
+</maml:para>
+<maml:para>`PS C:&gt;New-PSDrive -Name MDTProduction -PSProvider MDTProvider -Root "\FILESERVER\MDTProduction$" -NetworkPath "\FILESERVER\MDTProduction$" -Scope Global`
+</maml:para>
+<maml:para>or
+</maml:para>
+<maml:para>`PS C:&gt;Set-MDTDrive -Name MDTProduction -Path "\FILESERVER\MDTProduction$"`
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>GUID</maml:name>
+<maml:Description><maml:para>Specifies the GUID of an application to query the MDT share for. Alternate to Name Parameter.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Location</maml:name>
+<maml:Description><maml:para>Specifies that the query be restricted to a folder located within the Applications folder. Specifying "Install\Broken" for example would restrict the search to the folder "Applications\Install\Broken" in the MDT share.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>Name</maml:name>
+<maml:Description><maml:para>Specifies the name of an application to search the MDT share for. If typed explicitly (i.e. "Install - Adobe Flash Player - x64"), will only return applications that have that exact name. The parameter also supports wildcards though, so typing something like "\ adobe\ " would return all the applications that have adobe in their name.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ShareName</maml:name>
+<maml:Description><maml:para>Specifies the name of the MDT share to query. In order to query by name, the MDT share must be mounted using either New-PSDrive or Set-MDTDrive. Here are some examples that should get you up and running:
+</maml:para>
+<maml:para>`PS C:&gt;New-PSDrive -Name MDTProduction -PSProvider MDTProvider -Root "\FILESERVER\MDTProduction$" -NetworkPath "\FILESERVER\MDTProduction$" -Scope Global`
+</maml:para>
+<maml:para>or
+</maml:para>
+<maml:para>`PS C:&gt;Set-MDTDrive -Name MDTProduction -Path "\FILESERVER\MDTProduction$"`
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes><command:inputType><dev:type><maml:name>System.Object</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:inputType>
+</command:inputTypes>
+<command:returnValues><command:returnValue><dev:type><maml:name>System.Object</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:returnValue>
+</command:returnValues>
+<maml:alertSet><maml:alert><maml:para>
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>Example 1: Get all applications</maml:title>
+<dev:code>PS C:\&gt;Get-MDTApplication -ShareName MDTProduction</dev:code>
+<dev:remarks><maml:para>This command returns all applications from the MDT share.
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 2: Get only applications in a certain directory</maml:title>
+<dev:code>PS C:\&gt;Get-MDTApplication -ShareName MDTProduction -Location "APPBUNDLES"</dev:code>
+<dev:remarks><maml:para>This command returns all applications from the MDT share that are located in a folder called "APPBUNDLES" (located under the Applications root folder).
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 3: Get application by name</maml:title>
+<dev:code>PS C:\&gt;Get-MDTApplication -ShareName MDTProduction -Name "Install - Java 8 - x64"</dev:code>
+<dev:remarks><maml:para>This command returns the application with the name "Install - Java 8 - x64" from the MDT share.
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 4: Use wildcards to search for applications</maml:title>
+<dev:code>PS C:\&gt;Get-MDTApplication -ShareName MDTProduction -Name *java*</dev:code>
+<dev:remarks><maml:para>This command returns any applications that have the word java somewhere in their name from the MDT share.
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 5: Get application by GUID</maml:title>
+<dev:code>PS C:\&gt;Get-MDTApplication -ShareName MDTProduction -GUID "{4deefc41-71c2-4f59-bcf7-89fd4629a025}"</dev:code>
+<dev:remarks><maml:para>This command returns the application with the GUID "4deefc41-71c2-4f59-bcf7-89fd4629a025" from the MDT share.
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks><maml:navigationLink><maml:linkText>Online Version:</maml:linkText>
+<maml:uri>https://github.com/JohnForet/MDTApplicationTools/blob/master/docs/Get-MDTApplication.md</maml:uri>
+</maml:navigationLink>
+</command:relatedLinks>
+</command:command>
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>Get-MDTApplicationDependency</command:name>
+<command:verb>Get</command:verb>
+<command:noun>MDTApplicationDependency</command:noun>
+<maml:description><maml:para>Gets the application dependencies of or more MDT applications
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>The Get-MDTApplicationDependency function either returns all the applications that the application is dependent upon(applications that need to be installed before installing the queried application), or applications upon which the queried application is a dependency. It can go back either just one application, or can recurse the entire depth of the dependency tree.
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>Get-MDTApplicationDependency</maml:name>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>DependencyType</maml:name>
+<maml:Description><maml:para>Specifies whether to return the parent dependencies of the queried application(applications that need to be installed before installing the queried application), or to return the child dependencies of the queried application(applications where the queried application needs to be installed first). Possible options are ReturnParent and ReturnChild. Default value is ReturnParent.
+</maml:para>
+</maml:Description>
+<command:parameterValueGroup><command:parameterValue required="false" variableLength="false">ReturnParent</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">ReturnChild</command:parameterValue>
+</command:parameterValueGroup>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>ReturnParent</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>GUID</maml:name>
+<maml:Description><maml:para>Specifies the GUID of an application to query the MDT share for. Alternate to Name Parameter.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Recurse</maml:name>
+<maml:Description><maml:para>If specified recurses the dependency tree until it reaches the last dependency. If not, only finds dependencies that are one depth away.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ShareName</maml:name>
+<maml:Description><maml:para>Specifies the name of the MDT share to query. In order to query by name, the MDT share must be mounted using either New-PSDrive or Set-MDTDrive. Here are some examples that should get you up and running:
+</maml:para>
+<maml:para>`PS C:&gt;New-PSDrive -Name MDTProduction -PSProvider MDTProvider -Root "\FILESERVER\MDTProduction$" -NetworkPath "\FILESERVER\MDTProduction$" -Scope Global`
+</maml:para>
+<maml:para>or
+</maml:para>
+<maml:para>`PS C:&gt;Set-MDTDrive -Name MDTProduction -Path "\FILESERVER\MDTProduction$"`
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+<command:syntaxItem><maml:name>Get-MDTApplicationDependency</maml:name>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>DependencyType</maml:name>
+<maml:Description><maml:para>Specifies whether to return the parent dependencies of the queried application(applications that need to be installed before installing the queried application), or to return the child dependencies of the queried application(applications where the queried application needs to be installed first). Possible options are ReturnParent and ReturnChild. Default value is ReturnParent.
+</maml:para>
+</maml:Description>
+<command:parameterValueGroup><command:parameterValue required="false" variableLength="false">ReturnParent</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">ReturnChild</command:parameterValue>
+</command:parameterValueGroup>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>ReturnParent</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>Name</maml:name>
+<maml:Description><maml:para>Specifies the name of an application to search the MDT share for. If typed explicitly (i.e. "Install - Adobe Flash Player - x64"), will only return applications that have that exact name. The parameter also supports wildcards though, so typing something like "\ adobe\ " would return all the applications that have adobe in their name.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Recurse</maml:name>
+<maml:Description><maml:para>If specified recurses the dependency tree until it reaches the last dependency. If not, only finds dependencies that are one depth away.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ShareName</maml:name>
+<maml:Description><maml:para>Specifies the name of the MDT share to query. In order to query by name, the MDT share must be mounted using either New-PSDrive or Set-MDTDrive. Here are some examples that should get you up and running:
+</maml:para>
+<maml:para>`PS C:&gt;New-PSDrive -Name MDTProduction -PSProvider MDTProvider -Root "\FILESERVER\MDTProduction$" -NetworkPath "\FILESERVER\MDTProduction$" -Scope Global`
+</maml:para>
+<maml:para>or
+</maml:para>
+<maml:para>`PS C:&gt;Set-MDTDrive -Name MDTProduction -Path "\FILESERVER\MDTProduction$"`
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>DependencyType</maml:name>
+<maml:Description><maml:para>Specifies whether to return the parent dependencies of the queried application(applications that need to be installed before installing the queried application), or to return the child dependencies of the queried application(applications where the queried application needs to be installed first). Possible options are ReturnParent and ReturnChild. Default value is ReturnParent.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>ReturnParent</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>GUID</maml:name>
+<maml:Description><maml:para>Specifies the GUID of an application to query the MDT share for. Alternate to Name Parameter.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>Name</maml:name>
+<maml:Description><maml:para>Specifies the name of an application to search the MDT share for. If typed explicitly (i.e. "Install - Adobe Flash Player - x64"), will only return applications that have that exact name. The parameter also supports wildcards though, so typing something like "\ adobe\ " would return all the applications that have adobe in their name.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Recurse</maml:name>
+<maml:Description><maml:para>If specified recurses the dependency tree until it reaches the last dependency. If not, only finds dependencies that are one depth away.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ShareName</maml:name>
+<maml:Description><maml:para>Specifies the name of the MDT share to query. In order to query by name, the MDT share must be mounted using either New-PSDrive or Set-MDTDrive. Here are some examples that should get you up and running:
+</maml:para>
+<maml:para>`PS C:&gt;New-PSDrive -Name MDTProduction -PSProvider MDTProvider -Root "\FILESERVER\MDTProduction$" -NetworkPath "\FILESERVER\MDTProduction$" -Scope Global`
+</maml:para>
+<maml:para>or
+</maml:para>
+<maml:para>`PS C:&gt;Set-MDTDrive -Name MDTProduction -Path "\FILESERVER\MDTProduction$"`
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes><command:inputType><dev:type><maml:name>System.Object</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:inputType>
+</command:inputTypes>
+<command:returnValues><command:returnValue><dev:type><maml:name>System.Object</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:returnValue>
+</command:returnValues>
+<maml:alertSet><maml:alert><maml:para>
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>Example 1: Get any direct parent dependencies of an app</maml:title>
+<dev:code>PS C:\&gt; Get-MDTApplicationDependency -ShareName MDTProduction -Name "Install - Java Development Kit - x64"</dev:code>
+<dev:remarks><maml:para>Returns only applications that will be installed directly before the Java JDK is installed.
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 2: Get any direct child dependencies of an app</maml:title>
+<dev:code>PS C:\&gt; Get-MDTApplicationDependency -ShareName MDTProduction -Name "Install - Java Development Kit - x64" -DependencyType ReturnChild</dev:code>
+<dev:remarks><maml:para>Returns only applications that will install the Java JDK directly after they themselves are installed
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 3: Get **all** parent dependencies of an app</maml:title>
+<dev:code>PS C:\&gt; Get-MDTApplicationDependency -ShareName MDTProduction -Name "Install - Java Development Kit - x64" -Recurse</dev:code>
+<dev:remarks><maml:para>Returns all applications that need to be installed before the Java JDK is installed.
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 4: Get **all** child dependencies of an app</maml:title>
+<dev:code>PS C:\&gt; Get-MDTApplicationDependency -ShareName MDTProduction -Name "Install - Java Development Kit - x64" -Recurse -DependencyType ReturnChild</dev:code>
+<dev:remarks><maml:para>Returns all applications that will be installed after the Java JDK is installed
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks><maml:navigationLink><maml:linkText>Online Version:</maml:linkText>
+<maml:uri>https://github.com/JohnForet/MDTApplicationTools/blob/master/docs/Get-MDTApplicationDependency.md</maml:uri>
+</maml:navigationLink>
+</command:relatedLinks>
+</command:command>
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>Get-MDTApplicationSupportedPlatform</command:name>
+<command:verb>Get</command:verb>
+<command:noun>MDTApplicationSupportedPlatform</command:noun>
+<maml:description><maml:para>Gets the SupportedPlatform attribute of or more MDT applications
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>The Get-MDTApplicationSupportedPlatform function can either return the SupportedPlatform attribute of a queried application(via the name or GUID) parameter, return it for all applications, or return just applications that have it set(or not).
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>Get-MDTApplicationSupportedPlatform</maml:name>
+<command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>GUID</maml:name>
+<maml:Description><maml:para>Specifies the GUID of an application to query the MDT share for. Alternate to Name Parameter.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ShareName</maml:name>
+<maml:Description><maml:para>Specifies the name of the MDT share to query. In order to query by name, the MDT share must be mounted using either New-PSDrive or Set-MDTDrive. Here are some examples that should get you up and running:
+</maml:para>
+<maml:para>`PS C:&gt;New-PSDrive -Name MDTProduction -PSProvider MDTProvider -Root "\FILESERVER\MDTProduction$" -NetworkPath "\FILESERVER\MDTProduction$" -Scope Global`
+</maml:para>
+<maml:para>or
+</maml:para>
+<maml:para>`PS C:&gt;Set-MDTDrive -Name MDTProduction -Path "\FILESERVER\MDTProduction$"`
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>SupportedPlatformSet</maml:name>
+<maml:Description><maml:para>Specifies in the query whether to return just Applications that have it set(Yes), just Applications that do NOT have it set(No), or to return Applications that both states(All).
+</maml:para>
+</maml:Description>
+<command:parameterValueGroup><command:parameterValue required="false" variableLength="false">Yes</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">No</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">All</command:parameterValue>
+</command:parameterValueGroup>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>All</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+<command:syntaxItem><maml:name>Get-MDTApplicationSupportedPlatform</maml:name>
+<command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>Name</maml:name>
+<maml:Description><maml:para>Specifies the name of an application to search the MDT share for. If typed explicitly (i.e. "Install - Adobe Flash Player - x64"), will only return applications that have that exact name. The parameter also supports wildcards though, so typing something like "\ adobe\ " would return all the applications that have adobe in their name.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ShareName</maml:name>
+<maml:Description><maml:para>Specifies the name of the MDT share to query. In order to query by name, the MDT share must be mounted using either New-PSDrive or Set-MDTDrive. Here are some examples that should get you up and running:
+</maml:para>
+<maml:para>`PS C:&gt;New-PSDrive -Name MDTProduction -PSProvider MDTProvider -Root "\FILESERVER\MDTProduction$" -NetworkPath "\FILESERVER\MDTProduction$" -Scope Global`
+</maml:para>
+<maml:para>or
+</maml:para>
+<maml:para>`PS C:&gt;Set-MDTDrive -Name MDTProduction -Path "\FILESERVER\MDTProduction$"`
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>SupportedPlatformSet</maml:name>
+<maml:Description><maml:para>Specifies in the query whether to return just Applications that have it set(Yes), just Applications that do NOT have it set(No), or to return Applications that both states(All).
+</maml:para>
+</maml:Description>
+<command:parameterValueGroup><command:parameterValue required="false" variableLength="false">Yes</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">No</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">All</command:parameterValue>
+</command:parameterValueGroup>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>All</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>GUID</maml:name>
+<maml:Description><maml:para>Specifies the GUID of an application to query the MDT share for. Alternate to Name Parameter.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>Name</maml:name>
+<maml:Description><maml:para>Specifies the name of an application to search the MDT share for. If typed explicitly (i.e. "Install - Adobe Flash Player - x64"), will only return applications that have that exact name. The parameter also supports wildcards though, so typing something like "\ adobe\ " would return all the applications that have adobe in their name.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ShareName</maml:name>
+<maml:Description><maml:para>Specifies the name of the MDT share to query. In order to query by name, the MDT share must be mounted using either New-PSDrive or Set-MDTDrive. Here are some examples that should get you up and running:
+</maml:para>
+<maml:para>`PS C:&gt;New-PSDrive -Name MDTProduction -PSProvider MDTProvider -Root "\FILESERVER\MDTProduction$" -NetworkPath "\FILESERVER\MDTProduction$" -Scope Global`
+</maml:para>
+<maml:para>or
+</maml:para>
+<maml:para>`PS C:&gt;Set-MDTDrive -Name MDTProduction -Path "\FILESERVER\MDTProduction$"`
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>SupportedPlatformSet</maml:name>
+<maml:Description><maml:para>Specifies in the query whether to return just Applications that have it set(Yes), just Applications that do NOT have it set(No), or to return Applications that both states(All).
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>All</dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes><command:inputType><dev:type><maml:name>System.Object</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:inputType>
+</command:inputTypes>
+<command:returnValues><command:returnValue><dev:type><maml:name>System.Object</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:returnValue>
+</command:returnValues>
+<maml:alertSet><maml:alert><maml:para>
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>Example 1: Get all applications where the SupportedPlatform attribute is set(to anything)</maml:title>
+<dev:code>PS C:\&gt; Get-MDTApplicationSupportedPlatform -ShareName TESTSHARE -SupportedPlatformSet Yes</dev:code>
+<dev:remarks><maml:para>Returns all applications where SupportedPlatform is set.
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 2: Get all applications where the SupportedPlatform attribute is NOT set.</maml:title>
+<dev:code>PS C:\&gt; Get-MDTApplicationSupportedPlatform -ShareName TESTSHARE -SupportedPlatformSet No</dev:code>
+<dev:remarks><maml:para>Returns all applications where SupportedPlatform is NOT set.
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 3: Get SupportedPlatform attribute of specific application.</maml:title>
+<dev:code>PS C:\&gt; Get-MDTApplicationSupportedPlatform -ShareName TESTSHARE -Name "Install - Google Chrome -x64" -SupportedPlatformSet All</dev:code>
+<dev:remarks><maml:para>Returns the queried application along with it's SupportedPlatform attribute
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks><maml:navigationLink><maml:linkText>Online Version:</maml:linkText>
+<maml:uri>https://github.com/JohnForet/MDTApplicationTools/blob/master/docs/Get-MDTApplicationSupportedPlatform.md</maml:uri>
+</maml:navigationLink>
+</command:relatedLinks>
+</command:command>
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>Get-MDTDrive</command:name>
+<command:verb>Get</command:verb>
+<command:noun>MDTDrive</command:noun>
+<maml:description><maml:para>{{Fill in the Synopsis}}
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>{{Fill in the Description}}
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>Get-MDTDrive</maml:name>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none"><maml:name>Name</maml:name>
+<maml:Description><maml:para>{{Fill Name Description}}
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none"><maml:name>Name</maml:name>
+<maml:Description><maml:para>{{Fill Name Description}}
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes><command:inputType><dev:type><maml:name>None</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:inputType>
+</command:inputTypes>
+<command:returnValues><command:returnValue><dev:type><maml:name>System.Object</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:returnValue>
+</command:returnValues>
+<maml:alertSet><maml:alert><maml:para>
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>Example 1</maml:title>
+<dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+<dev:remarks><maml:para>{{ Add example description here }}
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks></command:relatedLinks>
+</command:command>
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>Import-MDTModule</command:name>
+<command:verb>Import</command:verb>
+<command:noun>MDTModule</command:noun>
+<maml:description><maml:para>{{Fill in the Synopsis}}
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>{{Fill in the Description}}
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>Import-MDTModule</maml:name>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters></command:parameters>
+<command:inputTypes><command:inputType><dev:type><maml:name>None</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:inputType>
+</command:inputTypes>
+<command:returnValues><command:returnValue><dev:type><maml:name>System.Object</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:returnValue>
+</command:returnValues>
+<maml:alertSet><maml:alert><maml:para>
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>Example 1</maml:title>
+<dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+<dev:remarks><maml:para>{{ Add example description here }}
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks></command:relatedLinks>
+</command:command>
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>Set-MDTApplicationSupportedPlatform</command:name>
+<command:verb>Set</command:verb>
+<command:noun>MDTApplicationSupportedPlatform</command:noun>
+<maml:description><maml:para>Sets the SupportedPlatform attribute of or more MDT applications
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>The Set-MDTApplicationSupportedPlatform function sets the SupportedPlatform attribute on one or more MDT applications. It can either set the attribute to Null, or can set it to one of the predefined OS's. The OS restriction types are a bit more granular when setting this attribute via MDT's GUI, so due to the complexity behind scripting each one, broader "catch-all" types are used. At the moment this tool also disregards any previous settings of the attribute, so any previous settings will be overwritten with the new data specified by the command.
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>Set-MDTApplicationSupportedPlatform</maml:name>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
+<maml:Description><maml:para>The confirm preference. If left alone, will prompt you before modifying each application. If set to $false, it just goes through.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>$true</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>GUID</maml:name>
+<maml:Description><maml:para>Specifies the GUID of an application to query the MDT share for. Alternate to Name Parameter.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>SetSupportedPlatformTo</maml:name>
+<maml:Description><maml:para>Specifies what OS restriction to apply to the application(or to remove the restriction by selecting Null). The OS restriction types are a bit more granular when setting this attribute via MDT's GUI, so due to the complexity behind scripting each one, broader "catch-all" types are used. At the moment this tool also disregards any previous settings of the attribute, so any previous settings will be overwritten with the new data specified here.
+</maml:para>
+</maml:Description>
+<command:parameterValueGroup><command:parameterValue required="false" variableLength="false">Null</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">Windows7Only</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">Windows8Only</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">Windows8.1Only</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">Windows10Only</command:parameterValue>
+</command:parameterValueGroup>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ShareName</maml:name>
+<maml:Description><maml:para>Specifies the name of the MDT share to query. In order to query by name, the MDT share must be mounted using either New-PSDrive or Set-MDTDrive. Here are some examples that should get you up and running:
+</maml:para>
+<maml:para>`PS C:&gt;New-PSDrive -Name MDTProduction -PSProvider MDTProvider -Root "\FILESERVER\MDTProduction$" -NetworkPath "\FILESERVER\MDTProduction$" -Scope Global`
+</maml:para>
+<maml:para>or
+</maml:para>
+<maml:para>`PS C:&gt;Set-MDTDrive -Name MDTProduction -Path "\FILESERVER\MDTProduction$"`
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
+<maml:Description><maml:para>If specified, will output what changes the command will make without making them.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+<command:syntaxItem><maml:name>Set-MDTApplicationSupportedPlatform</maml:name>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
+<maml:Description><maml:para>The confirm preference. If left alone, will prompt you before modifying each application. If set to $false, it just goes through.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>$true</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>Name</maml:name>
+<maml:Description><maml:para>Specifies the name of an application to search the MDT share for. If typed explicitly (i.e. "Install - Adobe Flash Player - x64"), will only return applications that have that exact name. The parameter also supports wildcards though, so typing something like "\ adobe\ " would return all the applications that have adobe in their name.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>SetSupportedPlatformTo</maml:name>
+<maml:Description><maml:para>Specifies what OS restriction to apply to the application(or to remove the restriction by selecting Null). The OS restriction types are a bit more granular when setting this attribute via MDT's GUI, so due to the complexity behind scripting each one, broader "catch-all" types are used. At the moment this tool also disregards any previous settings of the attribute, so any previous settings will be overwritten with the new data specified here.
+</maml:para>
+</maml:Description>
+<command:parameterValueGroup><command:parameterValue required="false" variableLength="false">Null</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">Windows7Only</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">Windows8Only</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">Windows8.1Only</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">Windows10Only</command:parameterValue>
+</command:parameterValueGroup>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ShareName</maml:name>
+<maml:Description><maml:para>Specifies the name of the MDT share to query. In order to query by name, the MDT share must be mounted using either New-PSDrive or Set-MDTDrive. Here are some examples that should get you up and running:
+</maml:para>
+<maml:para>`PS C:&gt;New-PSDrive -Name MDTProduction -PSProvider MDTProvider -Root "\FILESERVER\MDTProduction$" -NetworkPath "\FILESERVER\MDTProduction$" -Scope Global`
+</maml:para>
+<maml:para>or
+</maml:para>
+<maml:para>`PS C:&gt;Set-MDTDrive -Name MDTProduction -Path "\FILESERVER\MDTProduction$"`
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
+<maml:Description><maml:para>If specified, will output what changes the command will make without making them.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
+<maml:Description><maml:para>The confirm preference. If left alone, will prompt you before modifying each application. If set to $false, it just goes through.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>$true</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>GUID</maml:name>
+<maml:Description><maml:para>Specifies the GUID of an application to query the MDT share for. Alternate to Name Parameter.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="true" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>Name</maml:name>
+<maml:Description><maml:para>Specifies the name of an application to search the MDT share for. If typed explicitly (i.e. "Install - Adobe Flash Player - x64"), will only return applications that have that exact name. The parameter also supports wildcards though, so typing something like "\ adobe\ " would return all the applications that have adobe in their name.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>SetSupportedPlatformTo</maml:name>
+<maml:Description><maml:para>Specifies what OS restriction to apply to the application(or to remove the restriction by selecting Null). The OS restriction types are a bit more granular when setting this attribute via MDT's GUI, so due to the complexity behind scripting each one, broader "catch-all" types are used. At the moment this tool also disregards any previous settings of the attribute, so any previous settings will be overwritten with the new data specified here.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ShareName</maml:name>
+<maml:Description><maml:para>Specifies the name of the MDT share to query. In order to query by name, the MDT share must be mounted using either New-PSDrive or Set-MDTDrive. Here are some examples that should get you up and running:
+</maml:para>
+<maml:para>`PS C:&gt;New-PSDrive -Name MDTProduction -PSProvider MDTProvider -Root "\FILESERVER\MDTProduction$" -NetworkPath "\FILESERVER\MDTProduction$" -Scope Global`
+</maml:para>
+<maml:para>or
+</maml:para>
+<maml:para>`PS C:&gt;Set-MDTDrive -Name MDTProduction -Path "\FILESERVER\MDTProduction$"`
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
+<maml:Description><maml:para>If specified, will output what changes the command will make without making them.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes><command:inputType><dev:type><maml:name>System.Object</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:inputType>
+</command:inputTypes>
+<command:returnValues><command:returnValue><dev:type><maml:name>System.Object</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:returnValue>
+</command:returnValues>
+<maml:alertSet><maml:alert><maml:para>
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>Example 1: Remove OS restriction for ALL applications in MDT Share</maml:title>
+<dev:code>PS C:\&gt; Set-MDTApplicationSupportedPlatform -ShareName MDTProduction -SetSupportedPlatformTo Null</dev:code>
+<dev:remarks><maml:para>Removes the OS restriction for ALL applications in MDTProduction (add a -confirm:$false on the end to remove prompts for each application)
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 2: Set ALL applications in share to Windows 7</maml:title>
+<dev:code>PS C:\&gt; Set-MDTApplicationSupportedPlatform -ShareName MDTProduction -SetSupportedPlatformTo Windows7Only</dev:code>
+<dev:remarks><maml:para>Set OS restriction for ALL applications in MDTProduction to Windows 7(add a -confirm:$false on the end to remove prompts for each application)
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 3: Set one application to windows 10</maml:title>
+<dev:code>PS C:\&gt; Set-MDTApplicationSupportedPlatform -ShareName MDTProduction -Name "Install - Java Runtime Environment -x86" -SetSupportedPlatformTo Windows10Only</dev:code>
+<dev:remarks><maml:para>Set OS restriction for "Install - Java Runtime Environment -x86" in MDTProduction to Windows 10
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks><maml:navigationLink><maml:linkText>Online Version:</maml:linkText>
+<maml:uri>https://github.com/JohnForet/MDTApplicationTools/blob/master/docs/Set-MDTApplicationSupportedPlatform.md</maml:uri>
+</maml:navigationLink>
+</command:relatedLinks>
+</command:command>
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>Set-MDTDrive</command:name>
+<command:verb>Set</command:verb>
+<command:noun>MDTDrive</command:noun>
+<maml:description><maml:para>Creates an MDT drive.
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>The Set-MDTDrive function creates an MDT drive using the MDTProvider for powershell. This function is actually just a wrapper for New-PSDrive with the MDTProvider. For example this:
+</maml:para>
+<maml:para>`PS C:&gt;Set-MDTDrive -Name MDTProduction -Path "\FILESERVER\MDTProduction$"`
+</maml:para>
+<maml:para> is actually the same command as this:
+</maml:para>
+<maml:para>`PS C:&gt;New-PSDrive -Name MDTProduction -PSProvider MDTProvider -Root "\FILESERVER\MDTProduction$" -NetworkPath "\FILESERVER\MDTProduction$" -Scope Global`
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>Set-MDTDrive</maml:name>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none"><maml:name>Name</maml:name>
+<maml:Description><maml:para>Specifies what name you would like to give to the drive you want to create. This is the share name you'll reference later on when querying the share.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>Path</maml:name>
+<maml:Description><maml:para>{{Fill Path Description}}
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
+<maml:Description><maml:para>The confirm preference. If left alone, will just let the command run as normal. If $true is specified, will prompt you before creating the drive.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Force</maml:name>
+<maml:Description><maml:para>If specified, will create MDT drive even if one with same name already exists(in case one wants to create a drive of the same name with a different path)
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
+<maml:Description><maml:para>If specified, will output what changes the command will make without making them.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
+<maml:Description><maml:para>The confirm preference. If left alone, will just let the command run as normal. If $true is specified, will prompt you before creating the drive.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Force</maml:name>
+<maml:Description><maml:para>If specified, will create MDT drive even if one with same name already exists(in case one wants to create a drive of the same name with a different path)
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none"><maml:name>Name</maml:name>
+<maml:Description><maml:para>Specifies what name you would like to give to the drive you want to create. This is the share name you'll reference later on when querying the share.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none"><maml:name>Path</maml:name>
+<maml:Description><maml:para>{{Fill Path Description}}
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
+<maml:Description><maml:para>If specified, will output what changes the command will make without making them.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes><command:inputType><dev:type><maml:name>None</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:inputType>
+</command:inputTypes>
+<command:returnValues><command:returnValue><dev:type><maml:name>System.Object</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:returnValue>
+</command:returnValues>
+<maml:alertSet><maml:alert><maml:para>
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>Example 1: Create an MDT drive</maml:title>
+<dev:code>PS C:\&gt; Set-MDTDrive -Name MDTProduction -Path "\\FILESERVER\MDTProduction$"</dev:code>
+<dev:remarks><maml:para>Creates an MDT Drive with a name of `MDTProduction` and a path of `"\FILESERVER\MDTProduction$"`
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 2: Create an MDT drive, overwriting previous drives</maml:title>
+<dev:code>PS C:\&gt; Set-MDTDrive -Name MDTProduction -Path "\\FILESERVER\MDTProduction$" -Force</dev:code>
+<dev:remarks><maml:para>Creates an MDT Drive with a name of `MDTProduction` and a path of `"\FILESERVER\MDTProduction$"`, overwriting any previous drives with the name `MDTProduction`.
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 3: Shows what will happen if the command is run</maml:title>
+<dev:code>PS C:\&gt; Set-MDTDrive -Name MDTProduction -Path "\\FILESERVER\MDTProduction$" -WhatIf</dev:code>
+<dev:remarks><maml:para>Shows what will happen if you try to create an MDT Drive with a name of `MDTProduction` and a path of `"\FILESERVER\MDTProduction$"`
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks><maml:navigationLink><maml:linkText>Online Version:</maml:linkText>
+<maml:uri>https://github.com/JohnForet/MDTApplicationTools/blob/master/docs/Set-MDTDrive.md</maml:uri>
+</maml:navigationLink>
+</command:relatedLinks>
+</command:command>
+</helpItems>

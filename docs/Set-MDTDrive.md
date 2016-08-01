@@ -1,12 +1,12 @@
 ---
 external help file: MDTApplicationTools-help.xml
-online version: 
+online version: https://github.com/JohnForet/MDTApplicationTools/blob/master/docs/Set-MDTDrive.md
 schema: 2.0.0
 ---
 
 # Set-MDTDrive
 ## SYNOPSIS
-{{Fill in the Synopsis}}
+Creates an MDT drive.
 
 ## SYNTAX
 
@@ -15,21 +15,39 @@ Set-MDTDrive [-Name] <Object> [-Path] <Object> [-Force] [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
-{{Fill in the Description}}
+The Set-MDTDrive function creates an MDT drive using the MDTProvider for powershell. This function is actually just a wrapper for New-PSDrive with the MDTProvider. For example this:
+
+`PS C:\>Set-MDTDrive -Name MDTProduction -Path "\\FILESERVER\MDTProduction$"`
+
+ is actually the same command as this:
+
+`PS C:\>New-PSDrive -Name MDTProduction -PSProvider MDTProvider -Root "\\FILESERVER\MDTProduction$" -NetworkPath "\\FILESERVER\MDTProduction$" -Scope Global`
 
 ## EXAMPLES
 
-### Example 1
+### Example 1: Create an MDT drive
 ```
-PS C:\> {{ Add example code here }}
+PS C:\> Set-MDTDrive -Name MDTProduction -Path "\\FILESERVER\MDTProduction$"
 ```
 
-{{ Add example description here }}
+Creates an MDT Drive with a name of `MDTProduction` and a path of `"\\FILESERVER\MDTProduction$"`
+### Example 2: Create an MDT drive, overwriting previous drives
+```
+PS C:\> Set-MDTDrive -Name MDTProduction -Path "\\FILESERVER\MDTProduction$" -Force
+```
 
+Creates an MDT Drive with a name of `MDTProduction` and a path of `"\\FILESERVER\MDTProduction$"`, overwriting any previous drives with the name `MDTProduction`.
+### Example 3: Shows what will happen if the command is run
+```
+PS C:\> Set-MDTDrive -Name MDTProduction -Path "\\FILESERVER\MDTProduction$" -WhatIf
+```
+
+Shows what will happen if you try to create an MDT Drive with a name of `MDTProduction` and a path of `"\\FILESERVER\MDTProduction$"`
 ## PARAMETERS
 
 ### -Confirm
-{{Fill Confirm Description}}
+The confirm preference. If left alone, will just let the command run as normal. If $true is specified, will prompt you before creating the drive.
+
 
 ```yaml
 Type: SwitchParameter
@@ -38,37 +56,37 @@ Aliases: cf
 
 Required: False
 Position: Named
-Default value: 
+Default value:
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Force
-{{Fill Force Description}}
+If specified, will create MDT drive even if one with same name already exists(in case one wants to create a drive of the same name with a different path)
 
 ```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: False
 Position: Named
-Default value: 
+Default value:
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Name
-{{Fill Name Description}}
+Specifies what name you would like to give to the drive you want to create. This is the share name you'll reference later on when querying the share.
 
 ```yaml
 Type: Object
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 0
-Default value: 
+Default value:
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -79,17 +97,17 @@ Accept wildcard characters: False
 ```yaml
 Type: Object
 Parameter Sets: (All)
-Aliases: 
+Aliases:
 
 Required: True
 Position: 1
-Default value: 
+Default value:
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -WhatIf
-{{Fill WhatIf Description}}
+If specified, will output what changes the command will make without making them.
 
 ```yaml
 Type: SwitchParameter
@@ -98,7 +116,7 @@ Aliases: wi
 
 Required: False
 Position: Named
-Default value: 
+Default value:
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -115,4 +133,3 @@ Accept wildcard characters: False
 ## NOTES
 
 ## RELATED LINKS
-
