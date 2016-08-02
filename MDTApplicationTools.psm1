@@ -197,9 +197,8 @@ Function Get-MDTApplicationSupportedPlatform {
                    ValueFromPipelineByPropertyName=$true,
                    ParameterSetName='GUIDFilter')]
         $GUID,
-        [Parameter(Mandatory=$true)]
         [ValidateSet("Yes", "No", "All")]
-        $SupportedPlatformSet
+        $SupportedPlatformSet = "All"
     )
     PROCESS {
         switch ($PSCmdlet.ParameterSetName) {
