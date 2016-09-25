@@ -788,6 +788,273 @@
 <command:relatedLinks></command:relatedLinks>
 </command:command>
 <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>Rename-MDTApplication</command:name>
+<command:verb>Rename</command:verb>
+<command:noun>MDTApplication</command:noun>
+<maml:description><maml:para>Renames an MDT application.
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>The Rename-MDTApplication function renames an MDT application, optionally also renaming the source directory if the applications source files have been imported into MDT. Applications to be renamed can be specified by either their Name or their GUID.
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>Rename-MDTApplication</maml:name>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
+<maml:Description><maml:para>The confirm preference. If left alone, will prompt you before modifying each application. If set to $false, it just goes through.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>$true</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Force</maml:name>
+<maml:Description><maml:para>If specified, disables the checks to verify that 1: the app to be renamed exists and 2: that new name isn't already in use. Use carefully.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>$false</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>GUID</maml:name>
+<maml:Description><maml:para>Specifies the GUID of an application to query the MDT share for. Alternate to Name Parameter.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>NewName</maml:name>
+<maml:Description><maml:para>Specifies what the new name of the application will be once renamed. Rename-MDTApplication will check the existing applications to make sure there are no duplicates before making any changes.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>RenameSource</maml:name>
+<maml:Description><maml:para>If specified, will also rename the actual application source folder inside of the MDT share. This parameter will only process if the application has it's source files located within the MDT share(the three MDT app types are "apps with source files", "apps with sources on network or elsewhere", and "app bundles". this parameter only processes the first of these three).
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>$false</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ShareName</maml:name>
+<maml:Description><maml:para>Specifies the name of the MDT share to query. In order to query by name, the MDT share must be mounted using either New-PSDrive or Set-MDTDrive. Here are some examples that should get you up and running:
+</maml:para>
+<maml:para>`PS C:&gt;New-PSDrive -Name MDTProduction -PSProvider MDTProvider -Root "\FILESERVER\MDTProduction$" -NetworkPath "\FILESERVER\MDTProduction$" -Scope Global`
+</maml:para>
+<maml:para>or
+</maml:para>
+<maml:para>`PS C:&gt;Set-MDTDrive -Name MDTProduction -Path "\FILESERVER\MDTProduction$"`
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
+<maml:Description><maml:para>If specified, will output what changes the command will make without making them.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+<command:syntaxItem><maml:name>Rename-MDTApplication</maml:name>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
+<maml:Description><maml:para>The confirm preference. If left alone, will prompt you before modifying each application. If set to $false, it just goes through.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>$true</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Force</maml:name>
+<maml:Description><maml:para>If specified, disables the checks to verify that 1: the app to be renamed exists and 2: that new name isn't already in use. Use carefully.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>$false</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>Name</maml:name>
+<maml:Description><maml:para>Specifies the Name of an application to query the MDT share for. Alternate to GUID Parameter.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>NewName</maml:name>
+<maml:Description><maml:para>Specifies what the new name of the application will be once renamed. Rename-MDTApplication will check the existing applications to make sure there are no duplicates before making any changes.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>RenameSource</maml:name>
+<maml:Description><maml:para>If specified, will also rename the actual application source folder inside of the MDT share. This parameter will only process if the application has it's source files located within the MDT share(the three MDT app types are "apps with source files", "apps with sources on network or elsewhere", and "app bundles". this parameter only processes the first of these three).
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>$false</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ShareName</maml:name>
+<maml:Description><maml:para>Specifies the name of the MDT share to query. In order to query by name, the MDT share must be mounted using either New-PSDrive or Set-MDTDrive. Here are some examples that should get you up and running:
+</maml:para>
+<maml:para>`PS C:&gt;New-PSDrive -Name MDTProduction -PSProvider MDTProvider -Root "\FILESERVER\MDTProduction$" -NetworkPath "\FILESERVER\MDTProduction$" -Scope Global`
+</maml:para>
+<maml:para>or
+</maml:para>
+<maml:para>`PS C:&gt;Set-MDTDrive -Name MDTProduction -Path "\FILESERVER\MDTProduction$"`
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
+<maml:Description><maml:para>If specified, will output what changes the command will make without making them.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
+<maml:Description><maml:para>The confirm preference. If left alone, will prompt you before modifying each application. If set to $false, it just goes through.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>$true</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>Force</maml:name>
+<maml:Description><maml:para>If specified, disables the checks to verify that 1: the app to be renamed exists and 2: that new name isn't already in use. Use carefully.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>$false</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>GUID</maml:name>
+<maml:Description><maml:para>Specifies the GUID of an application to query the MDT share for. Alternate to Name Parameter.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="named" aliases="none"><maml:name>Name</maml:name>
+<maml:Description><maml:para>Specifies the Name of an application to query the MDT share for. Alternate to GUID Parameter.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>NewName</maml:name>
+<maml:Description><maml:para>Specifies what the new name of the application will be once renamed. Rename-MDTApplication will check the existing applications to make sure there are no duplicates before making any changes.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>RenameSource</maml:name>
+<maml:Description><maml:para>If specified, will also rename the actual application source folder inside of the MDT share. This parameter will only process if the application has it's source files located within the MDT share(the three MDT app types are "apps with source files", "apps with sources on network or elsewhere", and "app bundles". this parameter only processes the first of these three).
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>$false</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ShareName</maml:name>
+<maml:Description><maml:para>Specifies the name of the MDT share to query. In order to query by name, the MDT share must be mounted using either New-PSDrive or Set-MDTDrive. Here are some examples that should get you up and running:
+</maml:para>
+<maml:para>`PS C:&gt;New-PSDrive -Name MDTProduction -PSProvider MDTProvider -Root "\FILESERVER\MDTProduction$" -NetworkPath "\FILESERVER\MDTProduction$" -Scope Global`
+</maml:para>
+<maml:para>or
+</maml:para>
+<maml:para>`PS C:&gt;Set-MDTDrive -Name MDTProduction -Path "\FILESERVER\MDTProduction$"`
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+<dev:type><maml:name>Object</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue></dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
+<maml:Description><maml:para>If specified, will output what changes the command will make without making them.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes><command:inputType><dev:type><maml:name>System.Object</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:inputType>
+</command:inputTypes>
+<command:returnValues><command:returnValue><dev:type><maml:name>System.Object</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:returnValue>
+</command:returnValues>
+<maml:alertSet><maml:alert><maml:para>
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>Example 1: Rename an application</maml:title>
+<dev:code>PS C:\&gt; Rename-MDTApplication -ShareName MDTProduction -Name "APP1" -NewName "APP2"</dev:code>
+<dev:remarks><maml:para>Renames APP1 to APP2(changes the "Name" and "ShortName" attributes)
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 2: Rename an application, also renaming it's source directory</maml:title>
+<dev:code>PS C:\&gt; Rename-MDTApplication -ShareName MDTProduction -Name "APP1" -NewName "APP2" -RenameSource</dev:code>
+<dev:remarks><maml:para>Renames APP1 to APP2, also changing the source directory name from APP1 to APP2(changes the "Name", "ShortName", "Source", and "WorkingDirectory" attributes, also renaming the source directory itself)
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 3: Rename an application, also renaming it's source directory</maml:title>
+<dev:code>PS C:\&gt; Rename-MDTApplication -ShareName MDTProduction -Name "APP1" -NewName "APP2" -Force</dev:code>
+<dev:remarks><maml:para>Renames APP1 to APP2, with the Force parameter disabling the check to see if the application to be renamed exists in the MDT share, and also the check to see if the New Name is already in use by another MDT application. Use with caution.
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks><maml:navigationLink><maml:linkText>Online Version:</maml:linkText>
+<maml:uri>https://github.com/JohnForet/MDTApplicationTools/blob/master/docs/Rename-MDTApplication.md</maml:uri>
+</maml:navigationLink>
+</command:relatedLinks>
+</command:command>
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
 <command:details><command:name>Set-MDTApplicationSupportedPlatform</command:name>
 <command:verb>Set</command:verb>
 <command:noun>MDTApplicationSupportedPlatform</command:noun>

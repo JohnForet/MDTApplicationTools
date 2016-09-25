@@ -364,3 +364,100 @@ Function Find-MDTApplicationContent {
         }
     }
 }
+
+function Rename-MDTApplication {
+    [cmdletbinding(
+        SupportsShouldProcess=$true,
+        ConfirmImpact="High"
+    )]
+    param(
+        [Parameter(Mandatory=$true)]
+        [Parameter(ParameterSetName='NameFilter')]
+        [Parameter(ParameterSetName='GUIDFilter')]
+        $ShareName,
+        [Parameter(Mandatory=$true,
+                   ValueFromPipelineByPropertyName=$true,
+                   ParameterSetName='NameFilter')]
+        $Name,
+        [Parameter(
+                   Mandatory=$true,
+                   ValueFromPipelineByPropertyName=$true,
+                   ParameterSetName='GUIDFilter')]
+        $GUID,
+        [Parameter(Mandatory=$true)]
+        [Parameter(ParameterSetName='NameFilter')]
+        [Parameter(ParameterSetName='GUIDFilter')]
+        $NewName,
+        [Parameter(ParameterSetName='NameFilter')]
+        [Parameter(ParameterSetName='GUIDFilter')]
+        [switch]$RenameSource,
+        [Parameter(ParameterSetName='NameFilter')]
+        [Parameter(ParameterSetName='GUIDFilter')]
+        [switch]$Force
+    )
+    PROCESS {
+        $prevappcheck = Get-MDTApplication -ShareName $ShareName -Name $NewName
+        if(!$prevappcheck -or $Force) {
+            switch ($PSCmdlet.ParameterSetName) {
+                "NameFilter" {
+                    $app = Get-MDTApplication -ShareName $ShareName -Name $Name
+                }
+                "GUIDFilter" {
+                    if($GUID -notmatch "{*}") {
+                        $GUID = ("{" + $GUID + "}")
+                    }
+                    $app = Get-MDTApplication -ShareName $ShareName -GUID $GUID
+                }
+            }
+            if($app -or $Force){
+                $appname = $app.Name                                                               #variable needed to display name in shouldprocess statements
+                $apppath = ([string]$app.PsPath -split "::")[1]                                    #path used for set-itemproperty statements
+                $newsourcepath = $apppath -replace "$ShareName`:","." -replace $app.Name,$NewName  #path used when changing source path property
+                if ($app.CommandLine -notlike "") {
+                    if ($app.Source -notlike "") {
+                        $apptype =  "APPSOURCE"
+                    } else {
+                        $apptype = "APPNOSOURCE"
+                    }
+                } else {
+                    $apptype = "APPBUNDLE"
+                }
+                if ($RenameSource -eq $false -or $apptype -eq "APPBUNDLE" -or $apptype -eq "APPNOSOURCE") {
+                    if ($PSCmdlet.ShouldProcess($ShareName,"Renaming $appname to $NewName")) {
+                        Set-ItemProperty -Path $apppath -Name ShortName -Value $NewName
+                        Set-ItemProperty -Path $apppath -Name Name -Value $NewName
+                    }
+                } else {
+                    $mdtdriveroot = Get-PSDrive -Name TESTSHARE | Select-Object -ExpandProperty Root
+                    $origfullpath = $mdtdriveroot + $app.Source.TrimStart(".")
+                    $oldsourcename = $app.Source.split("\") | Select-Object -Last 1
+                    if ($PSCmdlet.ShouldProcess($ShareName,"Renaming $appname to $NewName, and renaming source directory from $oldsourcename to $NewName")) {
+                        try {
+                            Rename-Item -Path $origfullpath -NewName $NewName -ErrorAction Stop
+                            Set-ItemProperty -Path $apppath -Name Source -Value $newsourcepath
+                            Set-ItemProperty -Path $apppath -Name WorkingDirectory -Value $newsourcepath
+                            Set-ItemProperty -Path $apppath -Name ShortName -Value $NewName
+                            Set-ItemProperty -Path $apppath -Name Name -Value $NewName
+                        } catch {
+                            Write-Error "issue renaming directory. no changes have been made."
+                        }
+                    }
+                }
+            } else {
+                switch ($PSCmdlet.ParameterSetName) {
+                    "NameFilter" {
+                        Write-Error "no app with Name $Name exists"
+                    }
+                    "GUIDFilter" {
+                        if($GUID -notmatch "{*}") {
+                            $GUID = ("{" + $GUID + "}")
+                        }
+                        Write-Error "no app with GUID $GUID exists"
+                    }
+                }
+            }
+        } else {
+            Write-Error "An app with the name $NewName already exists"
+        }
+    }
+}

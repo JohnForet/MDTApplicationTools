@@ -14,6 +14,8 @@ This module was created to provide some advanced functionality around the manipu
   * Sets the SupportedPlatform attribute on MDT applications
 * Find-MDTApplicationContent
   * Searches through either the installcmd attribute or the install scripts themselves of all the MDT applications in a share for the specified string(i.e "pause", "powershell.exe", "C:\Program Files (x86)", etc.)
+* Rename-MDTApplication
+  * Renames MDT applications, optionally renaming their source directory in MDT as well.
 
 ### Prerequisites
 
