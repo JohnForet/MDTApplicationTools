@@ -4,7 +4,7 @@ Function Import-MDTModule {
         if (Test-Path $MDTModuleInstallLocation) {
             Import-Module $MDTModuleInstallLocation
         } else {
-            Write-Error "MDT module not working"
+            Write-Error "MDT module not working. Microsoft Deployment Toolkit may need to be installed."
         }
     }
     $return = Get-Module MicrosoftDeploymentToolkit
