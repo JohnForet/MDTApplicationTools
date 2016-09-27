@@ -412,7 +412,6 @@ function Rename-MDTApplication {
             if($app -or $Force){
                 $appname = $app.Name                                                               #variable needed to display name in shouldprocess statements
                 $apppath = ([string]$app.PsPath -split "::")[1]                                    #path used for set-itemproperty statements
-                $newsourcepath = $apppath -replace "$ShareName`:","." -replace $app.Name,$NewName  #path used when changing source path property
                 if ($app.CommandLine -notlike "") {
                     if ($app.Source -notlike "") {
                         $apptype =  "APPSOURCE"
@@ -428,9 +427,10 @@ function Rename-MDTApplication {
                         Set-ItemProperty -Path $apppath -Name Name -Value $NewName
                     }
                 } else {
-                    $mdtdriveroot = Get-PSDrive -Name TESTSHARE | Select-Object -ExpandProperty Root
+                    $mdtdriveroot = Get-PSDrive -Name $ShareName | Select-Object -ExpandProperty Root
                     $origfullpath = $mdtdriveroot + $app.Source.TrimStart(".")
                     $oldsourcename = $app.Source.split("\") | Select-Object -Last 1
+                    $newsourcepath = $app.Source -replace $app.Name,$NewName                            #path used when changing source path property
                     if ($PSCmdlet.ShouldProcess($ShareName,"Renaming $appname to $NewName, and renaming source directory from $oldsourcename to $NewName")) {
                         try {
                             Rename-Item -Path $origfullpath -NewName $NewName -ErrorAction Stop
