@@ -430,7 +430,7 @@ function Rename-MDTApplication {
                     $mdtdriveroot = Get-PSDrive -Name $ShareName | Select-Object -ExpandProperty Root
                     $origfullpath = $mdtdriveroot + $app.Source.TrimStart(".")
                     $oldsourcename = $app.Source.split("\") | Select-Object -Last 1
-                    $newsourcepath = $app.Source -replace $app.Name,$NewName                            #path used when changing source path property
+                    $newsourcepath = $app.Source -replace $oldsourcename,$NewName                       #path used when changing source path property
                     if ($PSCmdlet.ShouldProcess($ShareName,"Renaming $appname to $NewName, and renaming source directory from $oldsourcename to $NewName")) {
                         try {
                             Rename-Item -Path $origfullpath -NewName $NewName -ErrorAction Stop
