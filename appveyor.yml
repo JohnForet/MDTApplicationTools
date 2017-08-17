@@ -1,0 +1,7 @@
+build: false
+
+install:
+  - cinst pester
+
+test_script:
+  - ps: Invoke-Pester -EnableExit
