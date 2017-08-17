@@ -1,6 +1,8 @@
 # MDT Application Tools
 A PowerShell module to provide enhanced functionality around the querying and manipulation of MDT applications.
 
+[![Build status](https://ci.appveyor.com/api/projects/status/github/JohnForet/mdtapplicationtools?branch=master&svg=true)](https://ci.appveyor.com/project/JohnForet/mdtapplicationtools/branch/master)
+
 ### Motivation
 This module was created to provide some advanced functionality around the manipulation of MDT applications. Some of the Functions included are:
 
